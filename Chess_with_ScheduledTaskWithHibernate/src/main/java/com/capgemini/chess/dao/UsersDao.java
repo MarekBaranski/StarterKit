@@ -8,5 +8,8 @@ public interface UsersDao {
 	public UserProfileTO getProfileById(long id);
 
 	public void updateProfile(UserUpdateTO userUpdateProfile);
+	
+	// dodawanie i kasowanie usera
+	//interface nie rozszerza dao (dobrze)
 
 }
