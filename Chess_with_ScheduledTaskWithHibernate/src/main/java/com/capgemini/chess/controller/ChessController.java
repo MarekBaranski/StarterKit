@@ -33,7 +33,7 @@ public class ChessController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public UserProfileTO getProfileById(@RequestParam("idUser") long id) {
-		return userService.getProfileById(id);
+		return userService.showProfileById(id);
 	}
 
 	

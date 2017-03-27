@@ -1,16 +1,15 @@
 package com.capgemini.chess.service;
 
 import com.capgemini.chess.service.to.UserProfileTO;
+import com.capgemini.chess.service.to.UserUpdateTO;
 
 public interface UserService {
 
-	public UserProfileTO getProfileById(long id);
+	public UserProfileTO showProfileById(long id);
+	
+	public UserUpdateTO updateProfile(UserUpdateTO userUpdateProfile);
 
-	public void editUser(UserProfileTO user);
 	
-	public UserProfileTO changePassword(long id, String password);
-	
-	public void deleteUserById(long id);
 	
 
 }

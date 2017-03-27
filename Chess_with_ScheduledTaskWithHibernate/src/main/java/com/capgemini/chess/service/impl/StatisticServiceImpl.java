@@ -16,7 +16,7 @@ public class StatisticServiceImpl implements StatisticService {
 	@Override
 	public StatisticTO getMyStatisticById(long userId) {
 
-		return statisticDao.getStatisticById(userId);
+		return statisticDao.showStatisticById(userId);
 	}
 
 }

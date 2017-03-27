@@ -1,68 +1,113 @@
 package com.capgemini.chess.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
+import javax.transaction.Transactional;
+
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import com.capgemini.chess.dao.impl.UserDaoImple;
+import com.capgemini.chess.exception.ChessException;
 import com.capgemini.chess.service.to.UserProfileTO;
 
-
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
 public class UserDaoImplTest {
 
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
-	private UsersDao usersDao = new UserDaoImple();
-
-//	@Test
-//	public void testAutowiredSuccessful() {
-//
-//		assertNotNull(usersDao);
-//
-//	}
+	@Autowired
+	private UsersDao usersDao;
 
 	@Test
-	public void shouldFindUserById() {
-		
+	public void shouldShowProfileById() throws ChessException {
+
 		// when
-		UserProfileTO findUser = usersDao.getProfileById(8);
+		UserProfileTO findProfile = usersDao.findProfileById(2L);
 
 		// then
-		assertNotNull(findUser);
+		assertNotNull(findProfile);
+		assertEquals("dwa@wp.pl", findProfile.getEmail());
 
 	}
 
-	@Test
-	public void shouldNotFindUserById() {
+	@SuppressWarnings("unused")
+	@Test(expected = ChessException.class)
+	public void shouldNotShowProfileByIdButIdIsEmpty() throws ChessException {
 
 		// when
-		UserProfileTO findUser = usersDao.getProfileById(12);
+		UserProfileTO findProfile = usersDao.findProfileById(12L);
 
 		// then
-		assertNull(findUser);
+		fail("This method should throw SomeException");
 
 	}
 
+	@SuppressWarnings("unused")
 	@Test
-	public void shouldTestIfProfileIsEdit() {
-
+	public void testForException() throws Exception {
 		// given
-		UserProfileTO newUser = new UserProfileTO(7L, "dwanascie", "l12", "userDwanascie", "Dwunasty",
-				"dwanascie@wp.pl", "Jestem nowym uzytkownikiem", "Ja tez lubie pograc w szachy");
+		Long userId = 15L;
+		// when
+		thrown.expect(ChessException.class);
+		thrown.expectMessage(ChessException.PROFILENOTFOUND);
+
+		UserProfileTO findProfile = usersDao.findProfileById(userId);
+		// then
+		fail("This method should throw SomeException");
+
+	}
+
+	@Test
+	public void updateProfile() throws ChessException {
+
+		UserProfileTO profile = new UserProfileTO();
+
+		profile = usersDao.findProfileById(5L);
+		// then
+		String actualMotto = profile.getLifeMotto();
 
 		// when
-		usersDao.editUser(newUser);
-		UserProfileTO changeUser = usersDao.getProfileById(7L);
+
+		profile.setEmail("piecipol@wp.pl");
+		profile.setLifeMotto("najbardziej to lubię grać");
 
 		// then
+		String newMotto = profile.getLifeMotto();
 
-		assertEquals("dwanascie", changeUser.getLogin());
+		assertEquals("Gram bo moj brat gra", actualMotto);
+		assertEquals("najbardziej to lubię grać", newMotto);
+		assertNotEquals(actualMotto, profile.getLifeMotto());
+		assertNotEquals(profile.getEmail(), "piec@wp.pl");
+	}
 
+	@SuppressWarnings("unused")
+	@Test(expected = ChessException.class)
+	public void shouldNotUpdateProfile() throws ChessException {
+
+		UserProfileTO profile = new UserProfileTO();
+
+		profile = usersDao.findProfileById(25L);
+		// then
+		String actualMotto = profile.getLifeMotto();
+
+		// when
+
+		profile.setEmail("piecipol@wp.pl");
+		profile.setLifeMotto("najbardziej to lubię grać");
+
+		// then
+		fail("This method should throw SomeException");
 	}
 
 }

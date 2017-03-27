@@ -15,7 +15,7 @@ public class MatchServiceImpl implements MatchService {
 
 	@Override
 	public MatchTO getMatchById(long matchId) {
-		return matchDao.getMatchById(matchId);
+		return matchDao.showMatchById(matchId);
 
 	}
 

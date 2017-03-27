@@ -35,7 +35,7 @@ public class UserServiceTest {
 	public void testReadUserSuccessful() throws Exception {
 
 		// when
-		UserProfileTO userTO = service.getProfileById(1L);
+		UserProfileTO userTO = service.showProfileById(1L);
 		assertNotNull(userTO);
 	}
 

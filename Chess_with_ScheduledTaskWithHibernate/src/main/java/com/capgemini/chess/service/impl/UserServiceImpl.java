@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.capgemini.chess.dao.UsersDao;
 import com.capgemini.chess.service.UserService;
 import com.capgemini.chess.service.to.UserProfileTO;
+import com.capgemini.chess.service.to.UserUpdateTO;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,26 +17,19 @@ public class UserServiceImpl implements UserService {
 	
 
 	@Override
-	public UserProfileTO getProfileById(long id) {
-		return userDao.getProfileById(id);
+	public UserProfileTO showProfileById(long id) {
+		return userDao.findProfileById(id);
 	}
+
+
 
 	@Override
-	public void editUser(UserProfileTO user) {
-
-		userDao.editUser(user);
-
+	public UserUpdateTO updateProfile(UserUpdateTO userUpdateProfile) {
+		
+		return userDao.updateProfile(userUpdateProfile);
 	}
 
-	@Override
-	public UserProfileTO changePassword(long id, String password) {
-		return userDao.changePassword(id, password);
-	}
-	
-	@Override
-	public void deleteUserById(long id) {
-	userDao.deleteUserById(id);
-	}
+
 
 
 }

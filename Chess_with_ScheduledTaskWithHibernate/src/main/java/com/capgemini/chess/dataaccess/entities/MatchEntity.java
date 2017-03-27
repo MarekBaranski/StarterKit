@@ -37,23 +37,15 @@ public class MatchEntity extends AbstractEntity implements Serializable {
 	}
 
 
-	public MatchEntity(Long id, ResultMatch result, UserEntity userId, UserEntity userId2) {
-		super();
-		this.id = id;
+	public MatchEntity(ResultMatch result, UserEntity userId, UserEntity userId2) {
+		
 		this.result = result;
 		this.user1 = userId;
 		this.user2 = userId2;
 	}
 
 
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 
 
 	public ResultMatch getResult() {

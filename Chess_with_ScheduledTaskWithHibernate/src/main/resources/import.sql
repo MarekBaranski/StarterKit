@@ -29,7 +29,7 @@ INSERT INTO baza_chess.matchs (result, user1_id, user2_id) values ('WIN1',4,3);
 INSERT INTO baza_chess.matchs (result, user1_id, user2_id) values ('WIN1',5,9);
 INSERT INTO baza_chess.matchs (result, user1_id, user2_id) values ('WIN2',6,1);
 INSERT INTO baza_chess.matchs (result, user1_id, user2_id) values ('WIN1',7,7);
-INSERT INTO baza_chess.matchs (result, user1_id, user2_id) values ('WIN1',8,6);
+INSERT INTO baza_chess.matchs (result, user1_id, user2_id) values ('DRAWN',8,6);
 INSERT INTO baza_chess.matchs (result, user1_id, user2_id) values ('WIN2',9,8);
-INSERT INTO baza_chess.matchs (result, user1_id, user2_id) values ('DRAWN',10,10);
+
 

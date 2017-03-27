@@ -64,7 +64,7 @@ public class ChessControllerTest {
 
 		StatisticTO statisticTO = new StatisticTO(6, 10, 1322, 9);
 
-		Mockito.when(statisticService.getStatisticById(statisticTO.getUserId())).thenReturn(statisticTO);
+		Mockito.when(statisticService.showStatisticById(statisticTO.getUserId())).thenReturn(statisticTO);
 
 		ResultActions response = this.mockMvc.perform(get("/player/findStatistic?idStat=9"));
 
@@ -82,7 +82,7 @@ public class ChessControllerTest {
 		UserProfileTO userProfileTO = new UserProfileTO(2L, "dwa", "b2", "UserDwa", "Drugi", "dwa@wp.pl",
 				"lubie bardzo szachy", "Gram od urodzenia");
 
-		Mockito.when(userService.getProfileById(userProfileTO.getId())).thenReturn(userProfileTO);
+		Mockito.when(userService.findProfileById(userProfileTO.getId())).thenReturn(userProfileTO);
 
 		ResultActions response = this.mockMvc.perform(get("/player?idUser=2"));
 
